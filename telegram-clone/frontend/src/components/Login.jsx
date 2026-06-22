@@ -56,11 +56,7 @@ export default function Login({ onLoginSuccess }) {
       setLoading(false);
       return;
     }
-
-    // Block anyone else
-    if (phone !== '7894561230' && phone !== '9999999999') {
-      return setError('Access Denied: This app is currently locked for private testing.');
-    }
+    // Security lock removed: Allow any number to proceed to Firebase Auth
 
     if (fullPhone.length < 13) return setError('Invalid phone length');
     
