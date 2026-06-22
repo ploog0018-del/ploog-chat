@@ -39,7 +39,7 @@ export default function Login({ onLoginSuccess }) {
     if (phone === '7894561230' || phone === '9999999999') {
       setLoading(true);
       try {
-        const res = await fetch(`http://${window.location.hostname}:5000/firebase-login`, {
+        const res = await fetch(`https://ploog-chat.onrender.com/firebase-login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ phone: fullPhone })
@@ -89,7 +89,7 @@ export default function Login({ onLoginSuccess }) {
       const result = await window.confirmationResult.confirm(otp);
       const user = result.user;
       // Get App JWT from Backend
-      const res = await fetch(`http://${window.location.hostname}:5000/firebase-login`, {
+      const res = await fetch(`https://ploog-chat.onrender.com/firebase-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: user.phoneNumber })

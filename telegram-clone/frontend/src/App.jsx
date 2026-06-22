@@ -134,7 +134,7 @@ function App() {
   useEffect(() => {
     if (!token) return;
 
-    const newSocket = io(`http://${window.location.hostname}:5000`, {
+    const newSocket = io('https://ploog-chat.onrender.com', {
       auth: { token }
     });
     setSocket(newSocket);
