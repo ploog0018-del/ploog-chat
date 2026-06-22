@@ -11,6 +11,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['blip_logo.png'],
+      workbox: {
+        maximumFileSizeToCacheInBytes: 15 * 1024 * 1024 // 15MB to allow TensorFlow models
+      },
       manifest: {
         name: 'Blip Secure Messenger',
         short_name: 'Blip',
