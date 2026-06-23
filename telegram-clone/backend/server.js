@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Connected to Atlas'))
   .catch(err => console.error('MongoDB Connection Error:', err));
 
-const JWT_SECRET = 'super-secret-jwt-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_jwt_key_12345';
 const otps = new Map(); // Store OTPs temporarily
 
 const app = express();
@@ -81,7 +81,7 @@ app.post('/firebase-login', apiLimiter, async (req, res) => {
       user = new User({ email: phone, name: phone });
       await user.save();
     }
-    const token = jwt.sign({ email: phone, phone }, process.env.JWT_SECRET || 'super_secret_jwt_key_12345', { expiresIn: '24h' });
+    const token = jwt.sign({ email: phone, phone }, JWT_SECRET, { expiresIn: '24h' });
     console.log(`[AUTH] User logged in via Firebase SMS: ${phone}`);
     return res.json({ token, user });
   } catch (err) {
@@ -132,7 +132,7 @@ const authenticateJWT = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     try {
-      const user = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_jwt_key_12345');
+      const user = jwt.verify(token, JWT_SECRET);
       req.user = user;
       return next();
     } catch (err) {
