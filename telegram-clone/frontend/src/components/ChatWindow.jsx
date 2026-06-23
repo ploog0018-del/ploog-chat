@@ -122,7 +122,7 @@ export default function ChatWindow({ activeChat, messages, socket, goBack, isOff
         formData.append('originalName', file.name);
 
         const token = localStorage.getItem('telegram-clone-jwt');
-        await fetch(`http://${window.location.hostname}:5000/upload-chunk`, {
+        await fetch(`https://ploog-chat.onrender.com/upload-chunk`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -135,7 +135,7 @@ export default function ChatWindow({ activeChat, messages, socket, goBack, isOff
 
       // Merge
       const token = localStorage.getItem('telegram-clone-jwt');
-      const res = await fetch(`http://${window.location.hostname}:5000/merge-chunks`, {
+      const res = await fetch(`https://ploog-chat.onrender.com/merge-chunks`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ export default function ChatWindow({ activeChat, messages, socket, goBack, isOff
                     <div className="movie-details">
                       <span className="movie-name">{msg.fileName}</span>
                       <span className="movie-size">{msg.fileSize}</span>
-                      <a href={`http://${window.location.hostname}:5000${msg.content}`} target="_blank" rel="noreferrer">
+                      <a href={`https://ploog-chat.onrender.com${msg.content}`} target="_blank" rel="noreferrer">
                         <button className="download-btn">Download / Stream</button>
                       </a>
                     </div>
