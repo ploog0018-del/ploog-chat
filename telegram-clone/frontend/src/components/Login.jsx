@@ -4,6 +4,7 @@ import { auth } from '../firebase';
 
 export default function Login({ onLoginSuccess }) {
   const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [step, setStep] = useState(1);
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
@@ -33,7 +34,7 @@ export default function Login({ onLoginSuccess }) {
   const requestOTP = async (e) => {
     e.preventDefault();
     
-    const fullPhone = '+91' + phone;
+    const fullPhone = countryCode + phone;
 
     // --- INSTANT LOGIN BYPASS FOR DEVELOPER ---
     if (phone === '7894561230' || phone === '9999999999') {
@@ -179,7 +180,7 @@ export default function Login({ onLoginSuccess }) {
         </div>
 
         <h2 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '15px', textAlign: 'center' }}>
-          {step === 1 ? 'Sign in to Ploog' : '+91 ' + phone}
+          {step === 1 ? 'Sign in to Ploog' : countryCode + ' ' + phone}
         </h2>
         
         {/* Removed description text as requested */}
@@ -191,24 +192,43 @@ export default function Login({ onLoginSuccess }) {
 
               {/* Phone Input */}
               <div style={{ position: 'relative', marginBottom: '40px' }}>
-                <span style={{ 
-                  position: 'absolute', 
-                  left: '0', 
-                  top: '12px', 
-                  fontSize: '16px', 
-                  color: isFocused || phone ? 'var(--text-primary)' : 'var(--text-secondary)' 
-                }}>+91</span>
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: '10px',
+                    fontSize: '16px',
+                    color: 'var(--text-primary)',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    outline: 'none',
+                    appearance: 'none',
+                    cursor: 'pointer',
+                    zIndex: 10
+                  }}
+                >
+                  <option value="+91">+91 (IN)</option>
+                  <option value="+1">+1 (US)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+971">+971 (AE)</option>
+                  <option value="+65">+65 (SG)</option>
+                  <option value="+60">+60 (MY)</option>
+                  <option value="+94">+94 (LK)</option>
+                  <option value="+61">+61 (AU)</option>
+                </select>
                 
                 <input
                   type="tel"
                   required
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 15))}
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
                   style={{
                     width: '100%',
-                    padding: '12px 0 12px 35px',
+                    padding: '12px 0 12px 80px',
                     fontSize: '16px',
                     color: 'var(--text-primary)',
                     backgroundColor: 'transparent',
