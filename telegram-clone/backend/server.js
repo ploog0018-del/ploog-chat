@@ -16,7 +16,7 @@ const User = require('./models/User');
 const Message = require('./models/Message');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect('mongodb+srv://ploog:ploog0018@cluster0.clhr6em.mongodb.net/ploog_db?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => console.log('MongoDB Connected to Atlas'))
   .catch(err => console.error('MongoDB Connection Error:', err));
 
