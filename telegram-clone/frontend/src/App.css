@@ -378,36 +378,57 @@
 }
 
 @media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
   .sidebar-container {
-    width: 100%;
-    min-width: 100%;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    height: 100vh !important;
   }
   
   .main-chat-container {
-    width: 100%;
-    min-width: 100%;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    height: 100vh !important;
   }
 
   .sidebar-container:not(.open) {
-    display: none;
+    display: none !important;
   }
   
   .main-chat-container:not(.open) {
-    display: none;
+    display: none !important;
   }
 
   .sidebar {
-    width: 100%;
-    min-width: 100%;
+    width: 100vw !important;
+    min-width: 100vw !important;
     border-right: none;
+    height: 100vh !important;
   }
   
   .chat-window {
-    width: 100%;
+    width: 100vw !important;
+    height: 100vh !important;
   }
 
   .back-btn.mobile-only {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .chat-header {
+    padding: 10px;
+    border-radius: 0;
+  }
+
+  .chat-input-area {
+    margin: 0;
+    border-radius: 0;
+    padding: 10px;
   }
 }
 
