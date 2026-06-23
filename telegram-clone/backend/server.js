@@ -122,7 +122,7 @@ const enforceIndiaOnly = (req, res, next) => {
   next();
 };
 
-app.use(enforceIndiaOnly);
+// app.use(enforceIndiaOnly);
 
 // ---------------------------------------------------------
 // AUTH MIDDLEWARE
@@ -253,16 +253,7 @@ io.use((socket, next) => {
     return next(new Error('Authentication error: Invalid token'));
   }
 
-  // Geo-restrict sockets as well
-  const clientIp = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
-  const isLocal = clientIp === '127.0.0.1' || clientIp === '::1' || clientIp === '::ffff:127.0.0.1' || clientIp.startsWith('192.168.') || clientIp.startsWith('10.') || clientIp.startsWith('::ffff:192.168.') || clientIp.startsWith('::ffff:10.');
-  if (isLocal) {
-    return next();
-  }
-  const geo = geoip.lookup(clientIp);
-  if (!geo || geo.country !== 'IN') {
-    return next(new Error('Access Denied: India Only'));
-  }
+  // geo-restriction bypassed for now
   next();
 });
 
